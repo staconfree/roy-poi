@@ -22,10 +22,10 @@ String templateFilePath = "D://template.xlsx";
 String exportFilePath = "D://export.xlsx";
 SxssfExcelParser excelParse = new SxssfExcelParser(templateFilePath, exportFilePath);
 Map<String,Object> dataStack = getBizData();// 此处获取业务代码
- excelParse.setTemplateSheetName("Sheet1");
+ excelParse.setTemplateSheetName("会员报表");
  excelParse.parse(dataStack);
  excelParse.endSheet();
- excelParse.setTemplateSheetName("Sheet2");
+ excelParse.setTemplateSheetName("机型报表");
  excelParse.parse(dataStack);
  excelParse.endSheet();
  excelParse.flush();
