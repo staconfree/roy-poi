@@ -9,10 +9,10 @@
 
 # 实现思路
 
-类似于写页面一样，先定好模板，然后填数。
-1、本工程实现的思路是，使用excel先画好一个模板，模板中写入一些变量和个性化标签。
-2、首次导出的时候，系统会读取模板内容（包括样式，数据等），并将模板信息以结构化的形式缓存在内存中。
-3、获取业务数据，按模板的格式填充数据自动进行导出。
+类似于写页面一样，先定好模板，然后填数。<br>
+1、本工程实现的思路是，使用excel先画好一个模板，模板中写入一些变量和个性化标签。<br>
+2、首次导出的时候，系统会读取模板内容（包括样式，数据等），并将模板信息以结构化的形式缓存在内存中。<br>
+3、获取业务数据，按模板的格式填充数据自动进行导出。<br>
 
 # 核心代码
 
@@ -30,3 +30,11 @@ Map<String,Object> dataStack = getBizData();// 此处获取业务代码
  excelParse.endSheet();
  excelParse.flush();
 ```
+# 演示效果
+
+运行源码中的TestParser
+会在 roy-poi/target/test-classes/ 下看到两个文件 template.xlsx 和 test_parser.xlsx ，一个是模板文件，一个是导出文件
+![sheet1](https://github.com/staconfree/roy-poi/raw/master/readme_pic/template-sheet1.png)
+![sheet2](https://github.com/staconfree/roy-poi/raw/master/readme_pic/template-sheet2.png)
+![export1](https://github.com/staconfree/roy-poi/raw/master/readme_pic/export-sheet1.png)
+![export2](https://github.com/staconfree/roy-poi/raw/master/readme_pic/export-sheet2.png)
