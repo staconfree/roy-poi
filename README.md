@@ -34,7 +34,7 @@ Map<String,Object> dataStack = getBizData();// 此处获取业务代码
 
 运行源码中的TestParser，**（ps：第一次导出由于要读模板和反射数据对象，所以比较慢，之后这些数据都会缓存就不会慢了）**<br>
 会在 roy-poi/target/test-classes/ 下看到两个文件 template.xlsx 和 test_parser.xlsx 。<br>
-- 一个是模板文件，如下：<br>
+- 前者是模板文件（是我们事先做好的），如下：<br>
 ![sheet1](https://github.com/staconfree/roy-poi/raw/master/readme_pic/template-sheet1.png)
 ![sheet2](https://github.com/staconfree/roy-poi/raw/master/readme_pic/template-sheet2.png)
 ```
@@ -48,7 +48,7 @@ ${#index+1} 代表循环体下标+1
 三、
 $$yyyy-$$MM-$$dd $$HH:$$mm:$$ss 自动打印系统时间
 ```
-- 另一个是导出文件，如下：<br>
+- 后者是导出文件，如下：<br>
 ![export1](https://github.com/staconfree/roy-poi/raw/master/readme_pic/export-sheet1.png)
 ![export2](https://github.com/staconfree/roy-poi/raw/master/readme_pic/export-sheet2.png)
 <br>从效果中可以看到，导出的格式跟模板格式一模一样，细看导出代码，可以发现预留了WriteCallBack接口，可以对导出的每个单元格做个性化的设置，如上面的合计那行做了横向的合并单元格
