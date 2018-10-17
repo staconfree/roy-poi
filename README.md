@@ -38,10 +38,11 @@ Map<String,Object> dataStack = getBizData();// 此处获取业务代码
 ![sheet1](https://github.com/staconfree/roy-poi/raw/master/readme_pic/template-sheet1.png)
 ![sheet2](https://github.com/staconfree/roy-poi/raw/master/readme_pic/template-sheet2.png)
 ```
-关键的模板格式解释：
+上面关键的模板格式解释：
 一、
 $$BEGINLOOP{"name":"brandList","mergedbaseon":[[1,2,3],[4]]}
-代表循环brandList对象，后面 mergedbaseon 的含义是，如果相邻两行的1,2,3列数据完全相同，则这三列相邻的数据自动合并单元格，同理相邻两行的第4列如果相同，则第四列相邻相同的数据也自动合并单元格
+代表循环brandList对象，后面 mergedbaseon 的含义是，如果相邻两行的1,2,3列数据完全相同，则这三列相邻的数据自动合并单元格，
+同理相邻两行的第4列如果相同，则第四列相邻相同的数据也自动合并单元格
 二、
 ${#index+1} 代表循环体下标+1
 三、
