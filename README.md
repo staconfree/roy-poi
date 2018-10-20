@@ -54,4 +54,75 @@ $$yyyy-$$MM-$$dd $$HH:$$mm:$$ss 自动打印系统时间
 <br>从效果中可以看到，导出的格式跟模板格式一模一样，细看导出代码，可以发现预留了WriteCallBack接口，可以对导出的每个单元格做个性化的设置，如上面的合计那行做了横向的合并单元格
 
 # 如何使用
+clone 代码下来，运行 clean install -Dmaven.test.skip 得到jar包 roy-poi-1.0.0.jar<br>
+然后以springboot工程为例，在pom文件中加入如下配置：
+```
+    <dependency>
+        <groupId>roy.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>1.0</version>
+        <scope>system</scope>
+        <systemPath>${basedir}/lib/roy-poi-1.0.0.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.8</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>commons-codec</artifactId>
+                <groupId>commons-codec</groupId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>3.8</version>
+    </dependency>
+    <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>2.2.3</version>
+        <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+        <groupId>com.esotericsoftware.reflectasm</groupId>
+        <artifactId>reflectasm</artifactId>
+        <version>1.05</version>
+    </dependency>
+```
+这样就可以了，但是由于springboot工程打包出来的是个jar包，一般我们会把模板也打包到jar包里，但是由于程序无法读取jar里面的模板，所以如果你的工程是springboot工程的话，需要先把jar包里面的模板使用io流的方式先复制到外面的文件夹，然后才可以使用上面的导出功能。<br>
+可以参考如下的copyFileOutJar方法：
+```
+public class FileUtil {
+    private static Map<String,Boolean> fileExists = new HashMap<>();
+
+    public static void copyFileOutJar(String srcClassPathFile, String targetFile) throws IOException {
+        ClassPathResource classPathResource = new ClassPathResource(srcClassPathFile);
+        InputStream inputStream = classPathResource.getInputStream();
+        File xslt = createFile(targetFile);
+        try {
+            FileUtils.copyInputStreamToFile(inputStream, xslt);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+    }
+
+    //  创建临时文件
+    private static File createFile(String targetFile) throws IOException{
+        File file = new File(targetFile);
+        String filePath = targetFile.substring(0,targetFile.lastIndexOf("/"));
+        if(!fileExists.containsKey(filePath) || !file.exists()){
+            File dir = new File(filePath);
+            if(!dir.exists() && !dir.isDirectory()){
+                dir.mkdir();
+            }
+            file.createNewFile();
+            fileExists.put(targetFile,true);
+        }
+        return file;
+    }
+}
+```
 
