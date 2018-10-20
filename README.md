@@ -16,7 +16,7 @@
 
 # 核心代码
 
-参考 com.staconfree.poi.write.sxssf.TestParser
+参考 **com.staconfree.poi.write.sxssf.TestParser**
 ```
 String templateFilePath = "D://template.xlsx";
 String exportFilePath = "D://export.xlsx";
@@ -55,7 +55,7 @@ $$yyyy-$$MM-$$dd $$HH:$$mm:$$ss 自动打印系统时间
 
 # 如何使用
 clone 代码下来，运行 clean install -Dmaven.test.skip 得到jar包 roy-poi-1.0.0.jar<br>
-然后以springboot工程为例，在pom文件中加入如下配置：
+然后以springboot工程为例，先讲roy-poi-1.0.0.jar 文件放到工程下的lib文件夹，然后在pom文件中加入如下配置：
 ```
     <dependency>
         <groupId>roy.poi</groupId>
